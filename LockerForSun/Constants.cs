@@ -5,9 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LockerForSun {
-    static class Constant {
+    class Constants {
         public const string ProgramName = "LockerForSun";
-        public const int Interval = 15*1000*60;
-
     }
 }

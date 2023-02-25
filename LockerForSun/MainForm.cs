@@ -21,13 +21,14 @@ namespace LockerForSun {
     public partial class MainForm : Form {
         private int CountOfAnswers = 0;
         private decimal CountSet = 0;
+        private CurrentTask CurrentTask = CurrentTask.Read;
         public MainForm() {
             InitializeComponent();
             this.Activated += MainForm_Activated;
         }
 
         private void MainForm_Activated(object sender, EventArgs e) {
-            textBox1.Focus(); 
+            textBox1.Focus();
         }
         public TextBox GetTextBox1() {
             return textBox1;
@@ -39,14 +40,14 @@ namespace LockerForSun {
             return label1;
         }
         private void Form1_Load(object sender, EventArgs e) {
-            StandartButton standartButton = new StandartButton("кнопка");
-            this.Controls.Add(standartButton);
+
+
             LoadAsync();
             async Task LoadAsync() {
                 await NewImage();
                 await PlayStart();
                 await MakeTaskAsync();
-                
+
             }
             async Task PlayStart() {
                 using (var soundPlayer = new SoundPlayer(Properties.Resources.Start)) {
@@ -64,7 +65,11 @@ namespace LockerForSun {
         }
         private void MakeTask() {
             this.BackgroundImage = null;
-            foreach(Control control in this.Controls) {
+            if (CurrentTask == CurrentTask.Read) {
+                Employer.GetTaskRead(this);
+                return;
+            }
+            foreach (Control control in this.Controls) {
                 control.Visible = true;
             }
             if (CountOfAnswers % 2 == 0) {
@@ -77,6 +82,20 @@ namespace LockerForSun {
             }
             SetSizesToElements();
             textBox1.Focus();
+        }
+
+        public void MinimizedForm() {
+            this.WindowState = FormWindowState.Minimized;
+            timer1.Interval = Constant.Interval;
+            timer1.Start();
+            if(CurrentTask== CurrentTask.Read) {
+                CurrentTask = CurrentTask.Math;
+                return;
+            }
+            if (CurrentTask == CurrentTask.Math) {
+                CurrentTask = CurrentTask.Read;
+                return;
+            }
         }
 
         private void SetSizesToElements() {
@@ -106,7 +125,7 @@ namespace LockerForSun {
 
         private void CheckAnswerAndMakeTask() {
             textBox1.Focus();
-            
+
             if (!int.TryParse(textBox1.Text, out int textBox1Num)) {
                 using (var soundPlayer = new SoundPlayer(Properties.Resources.zvuki_derevyannyih_dverey_sborka_31752)) {
                     soundPlayer.Play();
@@ -132,20 +151,21 @@ namespace LockerForSun {
                 using (var soundPlayer = new SoundPlayer(Properties.Resources.Finish)) {
                     soundPlayer.Play();
                 }
-                
+
                 this.WindowState = FormWindowState.Minimized;
                 FilmForm filmForm = new FilmForm();
                 filmForm.Show();
                 CountOfAnswers = 0;
-                CountSet = 0;  
-                timer1.Interval = 1300000;
+                CountSet = 0;
+                CurrentTask = CurrentTask.Read;
+                timer1.Interval = Constant.Interval;
                 timer1.Start();
             }
             textBox1.Clear();
             MakeTask();
         }
 
-        
+
 
         private void Form1_Deactivate(object sender, EventArgs e) {
             if (this.WindowState == FormWindowState.Minimized) {
@@ -185,7 +205,7 @@ namespace LockerForSun {
         }
 
         private void button1_MouseDown(object sender, MouseEventArgs e) {
-        
+
             button1.Width -= 3;
             button1.Height -= 3;
         }

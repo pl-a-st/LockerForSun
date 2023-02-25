@@ -69,7 +69,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.button1.BackgroundImage = global::LockerForSun.Properties.Resources.Кнопка1;
+            //this.button1.BackgroundImage = global::LockerForSun.Properties.Resources.Кнопка1;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.CausesValidation = false;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));

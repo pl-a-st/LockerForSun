@@ -8,7 +8,7 @@ using System.IO;
 namespace LockerForSun {
     static class DAL {
         public static string TakeUserPathFile(string fileName) {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal) +"\\" + Constant.ProgramName + "\\";
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + Constant.ProgramName + "\\";
             if (!Directory.Exists(path)) {
                 Directory.CreateDirectory(path);
             }

@@ -166,9 +166,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Interop.WMPLib.dll" />
     <None Include="Resources\PicToRead.bmp" />
     <None Include="bin\Debug\AxInterop.WMPLib.dll" />
     <None Include="bin\Debug\Interop.WMPLib.dll" />
+    <None Include="Resources\AxInterop.WMPLib.dll" />
     <Content Include="Resources\Cry.mp3" />
     <None Include="Resources\Move.avi" />
     <None Include="Resources\Start.wav" />
