@@ -166,6 +166,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Тихо все.wav" />
     <None Include="Resources\Interop.WMPLib.dll" />
     <None Include="Resources\PicToRead.bmp" />
     <None Include="bin\Debug\AxInterop.WMPLib.dll" />

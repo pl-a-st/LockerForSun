@@ -194,5 +194,14 @@ namespace LockerForSun.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.IO.UnmanagedMemoryStream, аналогичного System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Тихо_все {
+            get {
+                return ResourceManager.GetStream("Тихо_все", resourceCulture);
+            }
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace LockerForSun {
 
             }
             async Task PlayStart() {
-                using (var soundPlayer = new SoundPlayer(Properties.Resources.Start)) {
+                using (var soundPlayer = new SoundPlayer(Properties.Resources.Тихо_все)) {
                     soundPlayer.Play();
                 }
             }
