@@ -66,7 +66,7 @@ namespace LockerForSun {
         private void MakeTask() {
             this.BackgroundImage = null;
             if (CurrentTask == CurrentTask.Read) {
-                Employer.GetTaskRead(this);
+                Employer.GetTaskRead(this, picturesCount: 6, taskCount: 5);
                 return;
             }
             foreach (Control control in this.Controls) {
@@ -88,7 +88,7 @@ namespace LockerForSun {
             this.WindowState = FormWindowState.Minimized;
             timer1.Interval = Constant.Interval;
             timer1.Start();
-            if(CurrentTask== CurrentTask.Read) {
+            if (CurrentTask == CurrentTask.Read) {
                 CurrentTask = CurrentTask.Math;
                 return;
             }

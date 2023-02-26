@@ -31,18 +31,45 @@ namespace LockerForSun {
         }
         private static void SetNewListRandomPictureFiles(int picturesCount) {
             RandomListPictures.Clear();
+            bool isWasEqualFirstLetter = false;
             List<FileSystemInfo> temporaryListPictures = new List<FileSystemInfo>(PictureFiles);
-            for (int i = 0; i < picturesCount && temporaryListPictures.Count > 0; i++) {
+            for (int i = 0; RandomListPictures.Count < picturesCount && temporaryListPictures.Count > 0; i++) {
                 int rnd = Random.Next(0, temporaryListPictures.Count);
                 RandomListPictures.Add(temporaryListPictures[rnd]);
                 temporaryListPictures.RemoveAt(rnd);
+                if (!isWasEqualFirstLetter) {
+                    isWasEqualFirstLetter = GetEqualFirstLetter(picturesCount, temporaryListPictures);
+                }
             }
+        }
+
+        private static bool GetEqualFirstLetter(int picturesCount, List<FileSystemInfo> temporaryListPictures) {
+            bool isWasEqualFirstLetter;
+            foreach (FileSystemInfo pictureFileInfo in temporaryListPictures) {
+                if (RandomListPictures.Count == picturesCount) {
+                    isWasEqualFirstLetter = true;
+                    break;
+                }
+                if (pictureFileInfo.Name[0] == RandomListPictures[0].Name[0]) {
+                    RandomListPictures.Add(pictureFileInfo);
+
+                }
+            }
+            isWasEqualFirstLetter = true;
+            return isWasEqualFirstLetter;
+        }
+
+        private static void GetEqualFirstLetter(int i){
+
         }
         private static void SetAnswer(out bool isHasAnswer) {
             if (RandomListPictures.Count < 0) {
                 isHasAnswer = false;
                 return;
             }
+            
+            
+            
             int rnd = Random.Next(RandomListPictures.Count);
             Answer = RandomListPictures[rnd].Name.Replace(RandomListPictures[rnd].Extension, "");
             isHasAnswer = true;

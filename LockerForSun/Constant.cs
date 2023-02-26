@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LockerForSun {
     static class Constant {
         public const string ProgramName = "LockerForSun";
-        public const int Interval = 15*1000*60;
+        public const int Interval = 1000 *60 * 15;
 
     }
 }

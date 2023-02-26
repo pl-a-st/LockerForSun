@@ -31,6 +31,7 @@ namespace LockerForSun {
             }
             DesporeControls();
             Label LableForAnswer = NewLable(form);
+            SetLableForReadCounter(form, taskCount);
             for (int i = 0; i < Read.RandomListPictures.Count; i++) {
                 Button button = NewButton(form, picturesCount, taskCount, Padding, LableForAnswer, i);
                 ControlsToDel.Add(button);
@@ -39,11 +40,20 @@ namespace LockerForSun {
 
         }
 
+        private static void SetLableForReadCounter(MainForm form, int taskCount) {
+            Label lableForReadCounter = new Label();
+            lableForReadCounter.Text = ReadCounter + " из " + taskCount;
+            lableForReadCounter.Font = new Font(lableForReadCounter.Font.FontFamily, 25);
+            lableForReadCounter.ForeColor = Color.DarkGreen;
+            lableForReadCounter.AutoSize = true;
+            form.Controls.Add(lableForReadCounter);
+        }
+
         private static Button NewButton(MainForm form, int picturesCount, int taskCount, int Padding, Label LableForAnswer, int numButton) {
             Button button = new Button();
             button.Width = (form.ClientSize.Width - (picturesCount + 1) * Padding) / picturesCount;
             button.Height = button.Width;
-            button.Location = new Point(Padding + numButton * (button.Width + Padding), LableForAnswer.Location.Y + LableForAnswer.Height + 3*Padding);
+            button.Location = new Point(Padding + numButton * (button.Width + Padding), LableForAnswer.Location.Y + LableForAnswer.Height + 3 * Padding);
             button.BackgroundImage = Image.FromFile(Read.RandomListPictures[numButton].FullName);
             button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             button.Name = Read.RandomListPictures[numButton].Name.Replace(Read.RandomListPictures[numButton].Extension, "");
@@ -68,6 +78,9 @@ namespace LockerForSun {
                     }
                 }
                 else {
+                    if (ReadCounter > 0) {
+                        ReadCounter--;
+                    }
                     using (var soundPlayer = new SoundPlayer(Properties.Resources.NO)) {
                         soundPlayer.Play();
                     }
@@ -97,4 +110,3 @@ namespace LockerForSun {
         }
     }
 }
-                                                                                                                                     
